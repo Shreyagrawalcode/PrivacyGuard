@@ -11,6 +11,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import android.widget.Toast
+
 import android.util.Log
 @Composable
 fun AppScannerScreen(modifier: Modifier = Modifier) {
@@ -30,7 +32,7 @@ fun AppScannerScreen(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable{
-                        Log.d("PG","TAPPED: $appName" )}
+                        Toast.makeText(context, "Tapped: $appName", Toast.LENGTH_SHORT).show()}
                     .padding(horizontal = 16.dp, vertical = 10.dp)
             )
         }
