@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--this states XML and it version-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+        </intent>
+    </queries>
+<!--    it takes permission of knowing what all apps are there in the mobile-->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -8,6 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PrivacyGuard">
+<!--&lt     1st google allowing people to restore their data so that when they bought a new phone they can relogin-->
+<!--        2nd look in the file and find the best resolution-->
+<!--        3rd the app name shows in different languages so you dont need to change the code-->
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -20,5 +30,7 @@
             </intent-filter>
         </activity>
     </application>
-
+<!--    this application shows identity and setting of our apps-->
+    <!--android:name=".MainActivity"   the dot means the current package and the path-->
+<!--    category android:name="android.intent.category.LAUNCHER" this ensure app has a clickable icon in it-->
 </manifest>

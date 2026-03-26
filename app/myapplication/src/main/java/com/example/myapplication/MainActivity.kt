@@ -20,28 +20,13 @@ class MainActivity : ComponentActivity() {
         setContent {
             PrivacyGuardTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    AppScannerScreen(
+                                modifier = Modifier.padding(paddingValues = innerPadding)
+                            )
+
+
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello world",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    PrivacyGuardTheme {
-        Greeting("Android")
     }
 }
