@@ -12,8 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import android.widget.Toast
-
+import android.content.pm.PackageManager
 import android.util.Log
+
 @Composable
 fun AppScannerScreen(modifier: Modifier = Modifier) {
     val context = LocalContext.current
@@ -22,17 +23,30 @@ fun AppScannerScreen(modifier: Modifier = Modifier) {
         intent.addCategory(Intent.CATEGORY_LAUNCHER)
         context.packageManager
             .queryIntentActivities(intent, 0)
-            .map { it.loadLabel(context.packageManager).toString() }
-            .sorted()
+            .map {
+                val label = it.loadLabel(context.packageManager).toString()
+                val packageName = it.activityInfo.packageName
+                Pair(label, packageName)
+            }
+            .sortedBy { it.first }
     }
     LazyColumn(modifier = modifier) {
-        items(apps) { appName ->
+        items(apps) { app ->
             Text(
-                text = appName,
+                text = app.first,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable{
-                        Toast.makeText(context, "Tapped: $appName", Toast.LENGTH_SHORT).show()}
+                    .clickable {
+                        val permissions = try {
+                            context.packageManager
+                                .getPackageInfo(app.second, PackageManager.GET_PERMISSIONS)
+                                .requestedPermissions
+                                ?.toList() ?: emptyList()
+                        } catch (e: Exception) {
+                            emptyList()
+                        }
+                        Log.d("PG", "${app.first} permissions: $permissions")
+                    }
                     .padding(horizontal = 16.dp, vertical = 10.dp)
             )
         }
